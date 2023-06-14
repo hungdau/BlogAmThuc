@@ -1,0 +1,12 @@
+﻿@model List<Post>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@foreach(var item in Model){
+    <a style="font-size: 16px; font-weight:600" href="/Post/@item.PostedOn.Value.Year/@item.PostedOn.Value.Month.ToString("00")/@item.UrlSlug">
+        @item.Title
+     </a>
+    <hr/>
+}

@@ -1,0 +1,117 @@
+﻿@model CreatePostVM
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+	
+}
+
+<form method="post"  asp-action="Create" style="width:90%; margin: 0 auto;" enctype="multipart/form-data">
+	<div class="border p-3 mt-4" >
+		<div class="row pb-6">
+			<h2 class="text-primary">Create Post</h2>
+			<hr />
+		</div>
+		@*<div asp-validation-summary="All"></div>*@
+		<div class="mb-3">
+			<label asp-for="Title"></label>
+			<input asp-for="Title" class="form-control" onchange="myFunction()" />
+			<span asp-validation-for="Title" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="ShortDescription"></label>
+			<input asp-for="ShortDescription" class="form-control" />
+			<span asp-validation-for="ShortDescription" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="PostContent"></label>
+			<textarea asp-for="PostContent" rows="3" class="form-control"></textarea>
+			<span asp-validation-for="PostContent" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="ImagePath"></label>
+			<input type="file" asp-for="ImagePath" class="form-control" name="ImagePath" />
+			@*<input type="hidden" id="Image" value="" />
+			<input asp-for="Image" type="file" onchange="document.getElementById('Image').value = this.value;" />*@
+			<span asp-validation-for="ImagePath" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Tags">Enter the Tag list separated by ;</label>
+			<input asp-for="Tags" class="form-control" />
+			<span asp-validation-for="Tags" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Published"></label>
+			<select asp-for="Published" asp-items="@ViewBag.PublishedList" class="form-control"></select>
+			<span asp-validation-for="Published" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+                 <label asp-for="PostedOn"></label>
+                  @{
+                        var dateEst = "";
+                        if (Model!=null)
+                        {
+                            dateEst = Model.PostedOn.Value.ToShortDateString();
+                        }
+
+                    }
+                    <input id="datepicker" value="@dateEst" type="text" asp-for="@Model.PostedOn" class="form-control"/>
+                    
+                </div>
+            </div>
+		<div class="mb-3">
+			<label asp-for="CategoryId">Category</label>
+			<select asp-for="CategoryId" asp-items="@ViewBag.CategoryList" class="form-control">
+				<option disabled selected>--Select CoverType--</option>
+			</select>
+			<span asp-validation-for="CategoryId" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+		<a asp-controller="Posts" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			Back to List
+		</a>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+	<script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+      toolbar_mode: 'floating',
+   });
+  
+	function ValidateInput(){
+		if(document.getElementById("uploadBox").value==""){
+			Swal.fire({
+			  icon: 'error',
+			  title: 'Oops...',
+			  text: 'Please upload an Image!',
+			});
+			return false;
+		}
+		return true;
+	}
+	
+</script>
+<script>
+        $(function(){
+            $('#datepicker').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange:"1500:2022"
+            })
+        })
+    </script>
+}
+
+
+
+
+
+
+
+
+

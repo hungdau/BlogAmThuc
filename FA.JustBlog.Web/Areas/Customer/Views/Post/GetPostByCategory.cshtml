@@ -1,0 +1,122 @@
+﻿@model List<Post>
+
+@inject FA.JustBlog.Core.Infrastructures.IUnitOfWork _unitOfWork
+@{
+    ViewData["Title"] = "Get post by category";
+    var mostViewPost = _unitOfWork.PostRepository.GetMostViewedPost(5);
+    var latestPost = _unitOfWork.PostRepository.GetLatestPost(5);
+    var listTagName = _unitOfWork.TagRepository.GetAll();
+    var mostViewPost3 = _unitOfWork.PostRepository.GetMostViewedPost(3);
+    var count = 0;
+}
+@section Header{
+    <partial name="_Slide" model="mostViewPost3" />
+}
+
+<div class="container">
+    <div class="row" style="width: 110%; font-family: Arial; ">
+        <!-- Blog entries-->
+        <div class="col-lg-8" style="padding: 0">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    if(count == 0)
+                    {
+                        <h5 style="color:white; background-color:rgb(50, 50, 50); padding: 8px 0px 8px 15px;">Các bài viết thuộc danh mục: @item.Category.Name</h5>
+                        IList<Tag> listTag = _unitOfWork.TagRepository.GetTagsByPost(item.Id);
+                        <div class="col-6 col-md-6 SanPham" style="text-align: justify; padding: 3">
+                            <a href="/Post/@item.PostedOn.Value.Year/@item.PostedOn.Value.Month.ToString("00")/@item.UrlSlug">
+                                <img width="100%" height="280" src="~/custom/client/img/@item.Image">
+                            </a>
+                            <div class="card-body">
+                                <p style="text-align:center; font-size: 12px">
+                                    Tag:
+                                    @foreach (var tag in listTag)
+                                    {
+                                        <a href="/Customer/Post/GetPostByTag?tagName=@tag.Name" style="color: #008800; padding:5px; text-decoration:none;">
+                                            @tag.Name <span style="margin-left: 5px">|</span>
+                                        </a>
+                                    }
+                                </p>
+                                <br>
+                                <a href="/Post/@item.PostedOn.Value.Year/@item.PostedOn.Value.Month.ToString("00")/@item.UrlSlug">
+                                    <h5 style="margin-top: -15px; font-weight:700">@item.Title</h5>
+                                </a>
+                                <div class="small text-muted"><p class="post-meta" style="font-size: 12px">Posted @FA.JustBlog.Common.DayHelper.GetTimeFromCreated(item.PostedOn.Value) with rate @item.Rate by @item.ViewCount view(s)</p></div>
+                                <hr style="width: 30%; margin: 0 auto; margin-top: 10px; margin-bottom: 10px; color: #008800;" />
+                                <p class="card-text" style="font-size: 14px; font-weight:400">@item.ShortDescription</p>
+                                <p style="font-size: 13px; margin-top: 10px">Category: <a href="/Customer/Post/GetPostByCategory?categoryName=@item.Category.Name">@item.Category.Name</a></p>
+                                <a href="/Post/@item.PostedOn.Value.Year/@item.PostedOn.Value.Month.ToString("00")/@item.UrlSlug" class="link-primary" style="font-size: 15px">Xem tiếp&nbsp;>></a>
+                            </div>
+                            <hr style="margin-top: -1px" />
+                        </div>
+                        count++;
+                    }
+                    else
+                    {
+                        IList<Tag> listTag = _unitOfWork.TagRepository.GetTagsByPost(item.Id);
+                    <div class="col-6 col-md-6 SanPham" style="text-align: justify; padding: 3">
+                        <a href="/Post/@item.PostedOn.Value.Year/@item.PostedOn.Value.Month.ToString("00")/@item.UrlSlug">
+                            <img width="100%" height="280" src="~/custom/client/img/@item.Image">
+                        </a>
+                        <div class="card-body">
+                            <p style="text-align:center; font-size: 12px">
+                                Tag:
+                                @foreach (var tag in listTag)
+                                {
+                                    <a href="/Customer/Post/GetPostByTag?tagName=@tag.Name" style="color: #008800; padding:5px; text-decoration:none;">
+                                        @tag.Name <span style="margin-left: 5px">|</span>
+                                    </a>
+                                }
+                            </p>
+                            <br>
+                            <a href="/Post/@item.PostedOn.Value.Year/@item.PostedOn.Value.Month.ToString("00")/@item.UrlSlug">
+                                <h5 style="margin-top: -15px; font-weight:700">@item.Title</h5>
+                            </a>
+                            <div class="small text-muted"><p class="post-meta" style="font-size: 12px">Posted @FA.JustBlog.Common.DayHelper.GetTimeFromCreated(item.PostedOn.Value) with rate @item.Rate by @item.ViewCount view(s)</p></div>
+                            <hr style="width: 30%; margin: 0 auto; margin-top: 10px; margin-bottom: 10px; color: #008800;" />
+                            <p class="card-text" style="font-size: 14px; font-weight:400">@item.ShortDescription</p>
+                            <p style="font-size: 13px; margin-top: 10px">Category: <a href="/Customer/Post/GetPostByCategory?categoryName=@item.Category.Name">@item.Category.Name</a></p>
+                            <a href="/Post/@item.PostedOn.Value.Year/@item.PostedOn.Value.Month.ToString("00")/@item.UrlSlug" class="link-primary" style="font-size: 15px">Xem tiếp&nbsp;>></a>
+                        </div>
+                        <hr style="margin-top: -1px" />
+                    </div>
+                    }                  
+                }
+            </div>
+        </div>
+        <div class="col-lg-4" style="padding-left: 30px">
+            <partial name="_PartialAboutCard" />
+            <h2 class="post-title" style="margin-top:30px; margin-bottom: 20px">
+                Top 5 most view post
+            </h2>
+            <partial name="_ListPosts" model=mostViewPost />
+            <h2 class="post-title" style="margin-top:30px;  margin-bottom: 20px">
+                Tag:
+            </h2>
+            <partial name="_ListTags" model="listTagName" />
+
+        </div>
+    </div>
+</div>
+
+<style>
+/*    .arrow-down {
+        width: 0;
+        height: 0;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 4px solid black;
+        margin-top:  0px;
+        margin-bottom: 0px;
+        margin-left: 10px;
+    }*/
+
+    .SanPham {
+    }
+
+        .SanPham:hover {
+            cursor: pointer;
+            box-shadow: rgba(0, 0, 22, 0.02) 0px 54px 55px, rgba(0, 0, 22, 0.02) 0px -12px 30px, rgba(0, 0, 22, 0.02) 0px 4px 6px, rgba(0, 0, 22, 0.02) 0px 12px 13px, rgba(0, 0, 22, 0.02) 0px -3px 5px;
+        }
+</style>

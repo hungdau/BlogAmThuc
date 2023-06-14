@@ -1,0 +1,104 @@
+﻿@{
+    var status = Context.Request.Query["status"];
+    var latest = "text-primary";
+    var mostViewed = "text-primary";
+    var mostInteresting = "text-primary";
+    var published = "text-primary";
+    var unPublished = "text-primary";
+    var all = "text-primary";
+
+    switch (status)
+    {
+        case "latest":
+            latest = "active text-white";
+            break;
+        case "mostViewed":
+            mostViewed = "active text-white";
+            break;
+        case "mostInteresting":
+            mostInteresting = "active text-white";
+            break;
+        case "published":
+            published = "active text-white";
+            break;
+        case "unPublished":
+            unPublished = "active text-white";
+            break;
+        default:
+            all = "active text-white";
+            break;
+    }
+
+}
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="p-3">
+    <div class="d-flex justify-content-between pt-4">
+        <div class="p-2">
+            <h2 class="text-primary">Posts List</h2>
+        </div>
+        <div class="p-2">
+            <ul class="list-group list-group-horizontal-sm">
+                <a style="text-decoration:none;" asp-controller="Posts"
+                   asp-action="Index" asp-route-status="mostViewed">
+                <li class="list-group-item @mostViewed">Latest Posts</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Posts"
+                   asp-action="Index" asp-route-status="latest">
+                <li class="list-group-item @latest">Most Viewed Posts</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Posts"
+                   asp-action="Index" asp-route-status="mostInteresting">
+                <li class="list-group-item @mostInteresting">Most Interesting Posts</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Posts"
+                   asp-action="Index" asp-route-status="published">
+                <li class="list-group-item @published">Published Posts</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Posts"
+                   asp-action="Index" asp-route-status="unPublished">
+                <li class="list-group-item @unPublished">Un-published Posts</li>
+                </a>
+                <a style="text-decoration:none;" asp-controller="Posts"
+                   asp-action="Index" asp-route-status="all">
+                <li class="list-group-item @all">All</li>
+                </a>
+            </ul>
+        </div>
+    </div>
+    <br /><br />
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="text-primary">Post List</h2>
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="Posts" asp-action="Create" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> &nbsp; Create New Post
+                </a>
+            </div>
+        </div>
+        <br /><br />
+
+        <table id="tblData" class="table table-bPostsed table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>ShortDescription</th>
+                    <th>Post On</th>
+                    <th>Category Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+@section scripts{
+  
+    <script src="~/js/posts.js"></script>
+  
+}
+
+

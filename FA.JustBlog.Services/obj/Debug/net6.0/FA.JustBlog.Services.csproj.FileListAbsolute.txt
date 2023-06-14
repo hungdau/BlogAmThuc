@@ -1,0 +1,12 @@
+D:\Hoc olline\Thực Tập\FR_Fsoft\EF\Buoi1\FA.JustBlog\FA.JustBlog.Services\bin\Debug\net6.0\FA.JustBlog.Services.deps.json
+D:\Hoc olline\Thực Tập\FR_Fsoft\EF\Buoi1\FA.JustBlog\FA.JustBlog.Services\bin\Debug\net6.0\FA.JustBlog.Services.dll
+D:\Hoc olline\Thực Tập\FR_Fsoft\EF\Buoi1\FA.JustBlog\FA.JustBlog.Services\bin\Debug\net6.0\FA.JustBlog.Services.pdb
+D:\Hoc olline\Thực Tập\FR_Fsoft\EF\Buoi1\FA.JustBlog\FA.JustBlog.Services\obj\Debug\net6.0\FA.JustBlog.Services.csproj.AssemblyReference.cache
+D:\Hoc olline\Thực Tập\FR_Fsoft\EF\Buoi1\FA.JustBlog\FA.JustBlog.Services\obj\Debug\net6.0\FA.JustBlog.Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\Hoc olline\Thực Tập\FR_Fsoft\EF\Buoi1\FA.JustBlog\FA.JustBlog.Services\obj\Debug\net6.0\FA.JustBlog.Services.AssemblyInfoInputs.cache
+D:\Hoc olline\Thực Tập\FR_Fsoft\EF\Buoi1\FA.JustBlog\FA.JustBlog.Services\obj\Debug\net6.0\FA.JustBlog.Services.AssemblyInfo.cs
+D:\Hoc olline\Thực Tập\FR_Fsoft\EF\Buoi1\FA.JustBlog\FA.JustBlog.Services\obj\Debug\net6.0\FA.JustBlog.Services.csproj.CoreCompileInputs.cache
+D:\Hoc olline\Thực Tập\FR_Fsoft\EF\Buoi1\FA.JustBlog\FA.JustBlog.Services\obj\Debug\net6.0\FA.JustBlog.Services.dll
+D:\Hoc olline\Thực Tập\FR_Fsoft\EF\Buoi1\FA.JustBlog\FA.JustBlog.Services\obj\Debug\net6.0\refint\FA.JustBlog.Services.dll
+D:\Hoc olline\Thực Tập\FR_Fsoft\EF\Buoi1\FA.JustBlog\FA.JustBlog.Services\obj\Debug\net6.0\FA.JustBlog.Services.pdb
+D:\Hoc olline\Thực Tập\FR_Fsoft\EF\Buoi1\FA.JustBlog\FA.JustBlog.Services\obj\Debug\net6.0\ref\FA.JustBlog.Services.dll

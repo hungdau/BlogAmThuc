@@ -1,0 +1,92 @@
+﻿@model Post
+@{
+    ViewData["Title"] = "Details post";
+    var mostViewPost = _unitOfWork.PostRepository.GetMostViewedPost(5);
+    var latestPost = _unitOfWork.PostRepository.GetLatestPost(5);
+    var listTagName = _unitOfWork.TagRepository.GetAll();
+}
+<style>
+    .post-heading {
+        text-align: center;
+    }
+</style>
+@section Header{
+    <header class="masthead" style="background-image: url('/custom/client/img/@Model.Image')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="post-heading">
+                        <h1>@Model.Title</h1>
+                        <h2 class="subheading">@Model.ShortDescription</h2>
+                        <span class="meta">Posted @Model.PostedOn with rate @Model.Rate by @Model.ViewCount view(s)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+}
+
+
+@section ListPost{
+ 
+    }
+
+
+@*<div class="col-7">
+    <div class="row">
+        <div class="col-lg-10 col-md-12 mx-auto">
+            
+        </div>
+
+        <div class="col-lg-4" style="padding-left: 30px">
+            <partial name="_PartialAboutCard" />
+            <h2 class="post-title" style="margin-top:30px; margin-bottom: 20px">
+                Top 5 most view post
+            </h2>
+            <partial name="_ListPosts" model=mostViewPost />
+            <h2 class="post-title" style="margin-top:30px;  margin-bottom: 20px">
+                Tag:
+            </h2>
+            <partial name="_ListTags" model="listTagName" />
+
+        </div>
+</div>*@
+
+<div class="container">
+    <div class="row" style="width: 110%; font-family: Arial; ">
+        <!-- Blog entries-->
+        <div class="col-lg-8" style="padding: 0">
+                <div class="arrow-down">
+                </div>
+            <div class="row">
+                <div class="col-12 col-md-12 SanPham" style="text-align: justify; padding: 3">
+                    <div class="fa fa-cat">
+                    <h3>Công thức:</h3>
+                    <div>
+                        <p>@Model.PostContent</p>
+                            <img img width="100%" height="600px" style="max-width: 100%; max-height: 600px; background-size: cover; margin-top: 30px" src="~/custom/client/img//@Model.Image" class="d-block w-100 rounded" alt="..." />
+                    </div>
+                    <hr>
+                    <!-- Pager -->
+                    <div class="clearfix">
+                    <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4" style="padding-left: 30px">
+            <h2 class="post-title" style="margin-top:30px; margin-bottom: 20px">
+                Top 5 most view post
+            </h2>
+            <partial name="_ListPosts" model=mostViewPost />
+            <h2 class="post-title" style="margin-top:30px;  margin-bottom: 20px">
+                Tag:
+            </h2>
+            <partial name="_ListTags" model="listTagName" />
+
+        </div>
+     </div>
+</div>
+

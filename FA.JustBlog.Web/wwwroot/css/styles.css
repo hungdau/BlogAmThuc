@@ -1,0 +1,35 @@
+.nav-link {
+    padding: 10px 20px
+}
+.has-dropdown {
+    position: relative;
+}
+
+.is-dropdown {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+}
+
+.has-dropdown:hover .is-dropdown {
+    display: block;
+    list-style: none;
+    background: #fff;
+    padding: 0;
+    left: 15%;
+}
+
+.is-dropdown li {
+    display: block;
+}
+
+.is-dropdown-item {
+    font-size: 0.75rem;
+    font-weight: 800;
+    /*letter-spacing: 0.0625em;*/
+    padding: 0.8rem;
+    text-transform: uppercase;
+    color: #6c757d;
+    display: block;
+    white-space: nowrap;
+}

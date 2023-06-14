@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewData["Title"] = "Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var mostViewPost3 = _unitOfWork.PostRepository.GetMostViewedPost(3);
+}
+@model IEnumerable<FA.JustBlog.Core.Models.Category>
+@section Header{
+    <partial name="_Slide" model="mostViewPost3" />
+}
+<div class="container">
+    @foreach (var item in Model)
+    {
+        <h1 class="category-heading">@item.Name</h1>
+        <hr />
+        var listPost = _unitOfWork.PostRepository.GetPostsByCategory(item.Name).Take(10).ToList();
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                @foreach (var post in listPost)
+                {
+                    var listTag = _unitOfWork.TagRepository.GetTagsByPost(post.Id);
+                    <div class="SanPham new-arrival-item swiper-slide">
+                        <a href="/Post/@post.PostedOn.Value.Year/@post.PostedOn.Value.Month.ToString("00")/@post.UrlSlug">
+                            <img width="100%" height="280" src="~/custom/client/img/@post.Image">
+                        </a>
+                        <div class="card-body">
+                            <p style="text-align:center; font-size: 12px">
+
+                                Tag:
+                                @foreach (var tag in listTag)
+                                {
+                                    <a href="/Customer/Post/GetPostByTag?tagName=@tag.Name" style="color: #008800; padding:5px; text-decoration:none;">
+                                        @tag.Name <span style="margin-left: 5px">|</span>
+                                    </a>
+                                }
+                            </p>
+                            <br>
+                            <a href="/Post/@post.PostedOn.Value.Year/@post.PostedOn.Value.Month.ToString("00")/@post.UrlSlug">
+                                <h5 style="margin-top: -15px; font-weight:700">@post.Title</h5>
+                            </a>
+                            <div class="small text-muted"><p class="post-meta" style="font-size: 12px">Posted @FA.JustBlog.Common.DayHelper.GetTimeFromCreated(post.PostedOn.Value) with rate @post.Rate by @post.ViewCount view(s)</p></div>
+                            <hr style="width: 30%; margin: 0 auto; margin-top: 10px; margin-bottom: 10px; color: #008800;" />
+                            <p class="card-text" style="font-size: 14px; font-weight:400">@post.ShortDescription</p>
+                            <p style="font-size: 13px; margin-top: 10px">Category: <a href="/Customer/Post/GetPostByCategory?categoryName=@post.Category.Name">@post.Category.Name</a></p>
+                            <a href="/Post/@post.PostedOn.Value.Year/@post.PostedOn.Value.Month.ToString("00")/@post.UrlSlug" class="link-primary" style="font-size: 15px">Xem tiếp&nbsp;>></a>
+                        </div>
+                        <hr style="margin-top: -1px" />
+                    </div>
+                }
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="all-post">
+                <div class="btn-view">
+                    <a href="/Customer/Post/GetPostByCategory?categoryName=@item.Name">
+                        XEM TẤT CẢ BÀI VIẾT
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .category-heading {
+        text-align: center;
+    }
+
+    .btn-view {
+        display: flex;
+        justify-content: center;
+    }
+
+        .btn-view a {
+            background-color: rgb(50, 50, 50);
+            color: #fff;
+            padding: 10px 20px;
+            margin-bottom: 46px;
+        }
+
+            .btn-view a:hover {
+                text-decoration: none;
+            }
+
+    .arrow-down {
+        width: 0;
+        height: 0;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 4px solid rgb(50, 50, 50);
+        margin-top: -8px;
+        margin-bottom: 20px;
+        margin-left: 10px;
+    }
+
+    .SanPham {
+    }
+
+        .SanPham:hover {
+            cursor: pointer;
+            box-shadow: rgba(0, 0, 22, 0.02) 0px 54px 55px, rgba(0, 0, 22, 0.02) 0px -12px 30px, rgba(0, 0, 22, 0.02) 0px 4px 6px, rgba(0, 0, 22, 0.02) 0px 12px 13px, rgba(0, 0, 22, 0.02) 0px -3px 5px;
+        }
+</style>
+

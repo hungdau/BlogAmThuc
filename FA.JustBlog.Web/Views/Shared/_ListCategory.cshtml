@@ -1,0 +1,22 @@
+﻿@using FA.JustBlog.Core.Infrastructures
+@inject IUnitOfWork unitOfWork
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+
+*@
+@{
+    var listCategory = unitOfWork.CategoryRepository.GetAll();
+}
+
+
+@*<div class="dropdown">
+  <a class="dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white;">
+    Category
+  </a>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">*@
+@foreach (var item in listCategory)
+{
+    <li><a class="is-dropdown-item" href="/Customer/Post/GetPostByCategory?categoryName=@item.Name">@item.Name</a></li>
+}
+@*  </div>
+</div>*@
